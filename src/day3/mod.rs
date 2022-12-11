@@ -33,7 +33,8 @@ impl Letter {
     }
   }
 
-  pub fn contained_in_all<Hkt, F, G>(&self, f: F) -> bool
+  /// Is this letter contained in all of `F<F<Letter>>`? (where `F` is `Foldable)
+  pub fn in_all<Hkt, F, G>(&self, f: F) -> bool
     where F: Foldable<Hkt, G>,
           G: Foldable<Hkt, Self>,
           Hkt: HKT1<T<G> = F> + HKT1<T<Self> = G>
@@ -89,7 +90,7 @@ impl Rucksack {
         .foldl(|shared: Vec<Letter>, p: Pocket| {
                  shared.append(p.0
                                 .find(|l: &Letter| {
-                                  l.contained_in_all(self.clone().pockets().fmap(Pocket::letters))
+                                  l.in_all(self.clone().pockets().fmap(Pocket::letters))
                                 })
                                 .map(Vec::pure)
                                 .get_or(vec![]))
@@ -107,8 +108,7 @@ impl<S> From<S> for Rucksack where S: AsRef<str>
     let chars = || s.trim().split("").filter(|s| s != &"");
     let half = s.len() / 2;
 
-    Self(vec![chars().take(half).collect(),
-              chars().skip(half).collect()])
+    Self(vec![chars().take(half).collect(), chars().skip(half).collect()])
   }
 }
 
@@ -182,9 +182,7 @@ impl Input {
           rucks.clone().find_map(|ruck: Rucksack| {
                          ruck.clone()
                              .letters()
-                             .find(|l: &Letter| {
-                               l.contained_in_all(rucks.clone().fmap(Rucksack::letters))
-                             })
+                             .find(|l: &Letter| l.in_all(rucks.clone().fmap(Rucksack::letters)))
                        })
         })
         .fold(0u32, |sum, l| sum + l.priority())
