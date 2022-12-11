@@ -104,11 +104,11 @@ impl<S> From<S> for Rucksack where S: AsRef<str>
 {
   fn from(s: S) -> Self {
     let s = s.as_ref();
-    let iter = s.trim().split("").filter(|s| s != &"");
-    let midpt = s.len() / 2;
+    let chars = || s.trim().split("").filter(|s| s != &"");
+    let half = s.len() / 2;
 
-    Self(vec![iter.clone().take(midpt).collect(),
-              iter.skip(midpt).collect()])
+    Self(vec![chars().take(half).collect(),
+              chars().skip(half).collect()])
   }
 }
 
