@@ -119,25 +119,25 @@ mod test {
 
   #[test]
   fn sample_input() {
-    let input = include_str!("./day1_calorie_counting.input.sample");
+    let input = include_str!("./input.sample");
     assert_eq!(most_caloric_elf(input), 24000);
   }
 
   #[test]
   fn real_input() {
-    let input = include_str!("./day1_calorie_counting.input");
+    let input = include_str!("./input");
     assert_eq!(most_caloric_elf(input), 70509);
   }
 
   #[test]
   fn part_2_sample_input() {
-    let input = include_str!("./day1_calorie_counting.input.sample");
+    let input = include_str!("./input.sample");
     assert_eq!(total_calories_of_top_three(input), 45000);
   }
 
   #[test]
   fn part_2_real_input() {
-    let input = include_str!("./day1_calorie_counting.input");
+    let input = include_str!("./input");
     assert_eq!(total_calories_of_top_three(input), 208567);
   }
 }
