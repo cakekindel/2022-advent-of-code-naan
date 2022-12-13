@@ -72,7 +72,7 @@ pub fn count_overlapping_pairs<S>(s: S) -> usize
 
 #[cfg(test)]
 mod test {
-  use super::{count_pairs_where_one_fully_contained_by_other, count_overlapping_pairs};
+  use super::{count_overlapping_pairs, count_pairs_where_one_fully_contained_by_other};
 
   #[test]
   fn part_1_sample() {
@@ -88,13 +88,11 @@ mod test {
 
   #[test]
   fn part_2_sample() {
-    assert_eq!(count_overlapping_pairs(include_str!("./input.sample")),
-               4)
+    assert_eq!(count_overlapping_pairs(include_str!("./input.sample")), 4)
   }
 
   #[test]
   fn part_2() {
-    assert_eq!(count_overlapping_pairs(include_str!("./input")),
-               874)
+    assert_eq!(count_overlapping_pairs(include_str!("./input")), 874)
   }
 }
